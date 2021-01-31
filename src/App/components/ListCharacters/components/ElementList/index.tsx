@@ -1,9 +1,7 @@
 import React, { useEffect } from "react";
 
 import styled from "styled-components";
-import { getWindowDimensions } from "../../../../shared/components/Loading/Dimensions";
-
-const width = getWindowDimensions().width;
+import { getWindowDimensions } from "../../../../shared/components/Dimensions";
 
 const MainView = styled.div`
   width: 200px;
