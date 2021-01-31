@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { getCharacter } from "../../services/requests/character/characterMarvel";
-import { Character } from "../../types/character";
 import MainDiv from "../../shared/components/MainDiv";
 import { useDispatch } from "react-redux";
 import * as types from "../../redux/types";
@@ -10,6 +8,8 @@ import { Image, ImageDiv } from "../../shared/components/ImageDetails";
 import BodyDetails from "../../shared/components/BodyDetails";
 import DataLine from "../../shared/components/DataLine";
 import ListAux from "../../shared/components/ListAux";
+import { getComic } from "../../services/requests/comic/comicMarvel";
+import { Comic } from "../../types/comic";
 import Title from "../../shared/components/Title";
 
 interface Props {
@@ -20,17 +20,17 @@ interface Props {
   };
 }
 
-const DetailsCharacter = (props: Props) => {
+const DetailsComic = (props: Props) => {
   const dispatch = useDispatch();
-  const [character, setCharacter] = useState<Character>();
+  const [comic, setComic] = useState<Comic>();
 
   useEffect(() => {
     dispatch({ type: types.SET_LOADING, payload: true });
     if (props.match?.params?.id) {
-      getCharacter(props.match?.params?.id)
-        .then((character) => {
-          if (character) {
-            setCharacter(character);
+      getComic(props.match?.params?.id)
+        .then((comic) => {
+          if (comic) {
+            setComic(comic);
           } else {
             errorLoadData();
           }
@@ -47,15 +47,14 @@ const DetailsCharacter = (props: Props) => {
   }, []);
 
   const errorLoadData = () => {
-    alert("Ocorreu um error ao carregar o personagem");
-    dispatch({ type: types.SET_LOADING, payload: false });
+    alert("Ocorreu um error ao carregar o quadrinho");
   };
 
   return (
     <>
       <MainDiv>
         <MainDivAux flexDirection={isMobile() ? "column" : "row"}>
-          {character && (
+          {comic && (
             <>
               <ImageDiv
                 height={
@@ -67,7 +66,7 @@ const DetailsCharacter = (props: Props) => {
                 marginTop={isMobile() ? 0 : 20}
                 marginLeft={isMobile() ? 0 : 30}
               >
-                <Image isMobile={isMobile()} src={character.image} />
+                <Image isMobile={isMobile()} src={comic.image} />
               </ImageDiv>
               <BodyDetails
                 width={isMobile() ? undefined : "50%"}
@@ -80,14 +79,15 @@ const DetailsCharacter = (props: Props) => {
                 marginHorizontal={20}
                 shadow={isMobile() ? false : true}
               >
-                <Title>Detalhes do Personagem</Title>
-                <DataLine title={"Id"} text={character.id} />
-                <DataLine title={"Nome"} text={character.name} />
-                <DataLine title={"Descrição"} text={character.description} />
-                <ListAux title={"Quadrinhos"} list={character.comics} />
-                <ListAux title={"Séries"} list={character.series} />
-                <ListAux title={"Histórias"} list={character.stories} />
-                <ListAux title={"Eventos"} list={character.events} />
+                <Title>Detalhes do Quadrinho</Title>
+                <DataLine title={"Id"} text={comic.id} />
+                <DataLine title={"Nome"} text={comic.name} />
+                <DataLine title={"Descrição"} text={comic.description} />
+                <ListAux title={"Séries"} list={comic.series} />
+                <ListAux title={"Criadores"} list={comic.creators} />
+                <ListAux title={"Personagens"} list={comic.characters} />
+                <ListAux title={"Histórias"} list={comic.stories} />
+                <ListAux title={"Eventos"} list={comic.events} />
               </BodyDetails>
             </>
           )}
@@ -97,4 +97,4 @@ const DetailsCharacter = (props: Props) => {
   );
 };
 
-export default DetailsCharacter;
+export default DetailsComic;

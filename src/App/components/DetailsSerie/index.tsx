@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { getCharacter } from "../../services/requests/character/characterMarvel";
-import { Character } from "../../types/character";
 import MainDiv from "../../shared/components/MainDiv";
 import { useDispatch } from "react-redux";
 import * as types from "../../redux/types";
@@ -10,6 +8,8 @@ import { Image, ImageDiv } from "../../shared/components/ImageDetails";
 import BodyDetails from "../../shared/components/BodyDetails";
 import DataLine from "../../shared/components/DataLine";
 import ListAux from "../../shared/components/ListAux";
+import { getSerie } from "../../services/requests/serie/serieMarvel";
+import { Serie } from "../../types/serie";
 import Title from "../../shared/components/Title";
 
 interface Props {
@@ -20,17 +20,17 @@ interface Props {
   };
 }
 
-const DetailsCharacter = (props: Props) => {
+const DetailsSerie = (props: Props) => {
   const dispatch = useDispatch();
-  const [character, setCharacter] = useState<Character>();
+  const [serie, setSerie] = useState<Serie>();
 
   useEffect(() => {
     dispatch({ type: types.SET_LOADING, payload: true });
     if (props.match?.params?.id) {
-      getCharacter(props.match?.params?.id)
-        .then((character) => {
-          if (character) {
-            setCharacter(character);
+      getSerie(props.match?.params?.id)
+        .then((serie) => {
+          if (serie) {
+            setSerie(serie);
           } else {
             errorLoadData();
           }
@@ -47,7 +47,7 @@ const DetailsCharacter = (props: Props) => {
   }, []);
 
   const errorLoadData = () => {
-    alert("Ocorreu um error ao carregar o personagem");
+    alert("Ocorreu um error ao carregar a série");
     dispatch({ type: types.SET_LOADING, payload: false });
   };
 
@@ -55,7 +55,7 @@ const DetailsCharacter = (props: Props) => {
     <>
       <MainDiv>
         <MainDivAux flexDirection={isMobile() ? "column" : "row"}>
-          {character && (
+          {serie && (
             <>
               <ImageDiv
                 height={
@@ -67,7 +67,7 @@ const DetailsCharacter = (props: Props) => {
                 marginTop={isMobile() ? 0 : 20}
                 marginLeft={isMobile() ? 0 : 30}
               >
-                <Image isMobile={isMobile()} src={character.image} />
+                <Image isMobile={isMobile()} src={serie.image} />
               </ImageDiv>
               <BodyDetails
                 width={isMobile() ? undefined : "50%"}
@@ -80,14 +80,17 @@ const DetailsCharacter = (props: Props) => {
                 marginHorizontal={20}
                 shadow={isMobile() ? false : true}
               >
-                <Title>Detalhes do Personagem</Title>
-                <DataLine title={"Id"} text={character.id} />
-                <DataLine title={"Nome"} text={character.name} />
-                <DataLine title={"Descrição"} text={character.description} />
-                <ListAux title={"Quadrinhos"} list={character.comics} />
-                <ListAux title={"Séries"} list={character.series} />
-                <ListAux title={"Histórias"} list={character.stories} />
-                <ListAux title={"Eventos"} list={character.events} />
+                <Title>Detalhes da Série</Title>
+                <DataLine title={"Id"} text={serie.id} />
+                <DataLine title={"Nome"} text={serie.name} />
+                <DataLine title={"Descrição"} text={serie.description} />
+                <DataLine title={"Ano de início"} text={serie.startYear} />
+                <DataLine title={"Ano de fim"} text={serie.endYear} />
+                <ListAux title={"Criadores"} list={serie.creators} />
+                <ListAux title={"Personagens"} list={serie.characters} />
+                <ListAux title={"Histórias"} list={serie.stories} />
+                <ListAux title={"Quadrinhos"} list={serie.comics} />
+                <ListAux title={"Eventos"} list={serie.events} />
               </BodyDetails>
             </>
           )}
@@ -97,4 +100,4 @@ const DetailsCharacter = (props: Props) => {
   );
 };
 
-export default DetailsCharacter;
+export default DetailsSerie;

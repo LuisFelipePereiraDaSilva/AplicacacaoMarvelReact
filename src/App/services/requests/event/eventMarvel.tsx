@@ -29,7 +29,11 @@ export const getEvent = async (idUrl: string) => {
 const getEvents = async (idUrl?: string) => {
   const events: Event[] = [];
   await apiMarvel
-    .get(idUrl ? idUrl : "https://gateway.marvel.com/v1/public/events")
+    .get(
+      idUrl
+        ? "https://gateway.marvel.com/v1/public/events/" + idUrl
+        : "https://gateway.marvel.com/v1/public/events"
+    )
     .then((result: any) => {
       if (result) {
         result = result.data.data.results;

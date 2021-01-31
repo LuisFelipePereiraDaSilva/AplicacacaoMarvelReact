@@ -28,7 +28,11 @@ export const getCreator = async (idUrl: string) => {
 const getCreators = async (idUrl?: string) => {
   const creators: Creator[] = [];
   await apiMarvel
-    .get(idUrl ? idUrl : "https://gateway.marvel.com/v1/public/creators")
+    .get(
+      idUrl
+        ? "https://gateway.marvel.com/v1/public/creators/" + idUrl
+        : "https://gateway.marvel.com/v1/public/creators"
+    )
     .then((result: any) => {
       if (result) {
         result = result.data.data.results;

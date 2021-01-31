@@ -8,17 +8,10 @@ import { useDispatch } from "react-redux";
 import * as types from "../../../redux/types";
 import MainDiv from "../../../shared/components/MainDiv";
 import { getId, getWindowDimensions } from "../../../shared/functions";
+import Title from "../../../shared/components/Title";
 
 const List = styled.div`
   flex: 1;
-`;
-
-const Text = styled.p`
-  font-size: 40px;
-  font-weight: bold;
-  text-align: center;
-  margin-bottom: 15px;
-  margin-top: 10px;
 `;
 
 const ListPersonagens = () => {
@@ -48,7 +41,7 @@ const ListPersonagens = () => {
         marginLeft={30}
         marginRight={30}
       >
-        <Text>Personagens</Text>
+        <Title fontSize={40}>Personagens</Title>
 
         <List>
           <FlatList

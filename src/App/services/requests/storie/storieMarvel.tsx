@@ -29,7 +29,11 @@ export const getStorie = async (idUrl: string) => {
 const getStories = async (idUrl?: string) => {
   const stories: Storie[] = [];
   await apiMarvel
-    .get(idUrl ? idUrl : "https://gateway.marvel.com/v1/public/stories")
+    .get(
+      idUrl
+        ? "https://gateway.marvel.com/v1/public/stories/" + idUrl
+        : "https://gateway.marvel.com/v1/public/stories"
+    )
     .then((result: any) => {
       if (result) {
         result = result.data.data.results;

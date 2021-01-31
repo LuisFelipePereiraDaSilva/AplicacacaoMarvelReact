@@ -29,7 +29,11 @@ export const getComic = async (idUrl: string) => {
 const getComics = async (idUrl?: string) => {
   const comics: Comic[] = [];
   await apiMarvel
-    .get(idUrl ? idUrl : "https://gateway.marvel.com/v1/public/comics")
+    .get(
+      idUrl
+        ? "http://gateway.marvel.com/v1/public/comics/" + idUrl
+        : "https://gateway.marvel.com/v1/public/comics"
+    )
     .then((result: any) => {
       if (result) {
         result = result.data.data.results;

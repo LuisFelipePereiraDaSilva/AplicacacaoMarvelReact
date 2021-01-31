@@ -61,17 +61,17 @@ const ListAux = (props: Props) => {
 
   const clickMoreDetails = (resourceURI: string) => {
     if (props.title === "Personagens") {
-      return `DetailsCharacter/${getId(resourceURI)}`;
+      return `../DetailsCharacter/${getId(resourceURI)}`;
     } else if (props.title === "Quadrinhos") {
-      return `DetailsComic/${getId(resourceURI)}`;
+      return `../DetailsComic/${getId(resourceURI)}`;
     } else if (props.title === "Criadores") {
-      return `DetailsCreator/${getId(resourceURI)}`;
+      return `../DetailsCreator/${getId(resourceURI)}`;
     } else if (props.title === "Eventos") {
-      return `DetailsEvent/${getId(resourceURI)}`;
+      return `../DetailsEvent/${getId(resourceURI)}`;
     } else if (props.title === "Histórias") {
-      return `DetailsStorie/${getId(resourceURI)}`;
+      return `../DetailsStorie/${getId(resourceURI)}`;
     } else if (props.title === "Séries") {
-      return `DetailsSerie/${getId(resourceURI)}`;
+      return `../DetailsSerie/${getId(resourceURI)}`;
     } else {
       return "";
     }

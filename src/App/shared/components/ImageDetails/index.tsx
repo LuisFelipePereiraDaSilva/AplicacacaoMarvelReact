@@ -23,5 +23,5 @@ interface Image {
 export const Image = styled.img`
   height: ${(props: Image) => (props.isMobile ? "100%" : "80%")};
   width: ${(props: Image) => (props.isMobile ? "100%" : "80%")};
-  object-fit: cover;
+  object-fit: ${(props: Image) => (props.isMobile ? "cover" : "contain")};
 `;
