@@ -1,9 +1,7 @@
-import React, { useEffect, useState } from "react";
-//import { NavigationContainerRef } from "@react-navigation/native";
+import React from "react";
 import styled from "styled-components";
-import { getWindowDimensions } from "../Dimensions";
 
-const MainView = styled.div`
+const MainDiv = styled.div`
   flex: 1;
   height: 100%;
   width: 100%;
@@ -14,7 +12,7 @@ const MainView = styled.div`
   background-color: #fff;
 `;
 
-const Text = styled.text`
+const Text = styled.p`
   font-size: 40px;
   font-weight: bold;
 `;
@@ -22,9 +20,9 @@ const Text = styled.text`
 const Loading = () => {
   return (
     <>
-      <MainView>
+      <MainDiv>
         <Text>Carregando...</Text>
-      </MainView>
+      </MainDiv>
     </>
   );
 };

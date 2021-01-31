@@ -1,13 +1,12 @@
-import React, { useEffect } from "react";
+import React from "react";
 
 import styled from "styled-components";
-import { getWindowDimensions } from "../../../../shared/components/Dimensions";
+import { Link } from "react-router-dom";
 
-const MainView = styled.div`
+const MainDiv = styled.div`
   width: 200px;
   height: 210px;
   border-radius: 10px;
-  margin-horizontal: 5px;
   justify-content: center;
   align-items: center;
   display: flex;
@@ -23,45 +22,40 @@ const Image = styled.img`
   object-fit: cover;
 `;
 
-const Text = styled.text`
+const Text = styled.p`
   font-size: 18px;
   margin-top: 10px;
   font-weight: bold;
   text-align: center;
 `;
 
-const Button = styled.button`
-  border: none !important;
-  background-color: white !important;
+const Button = styled(Link)`
   align-items: center;
   justify-content: center;
   display: flex;
-  outline: none;
-  cursor: pointer;
 `;
 
 interface Props {
   name: string;
   image?: string;
+  id: string;
 }
 
 const ElementList = (props: Props) => {
   return (
-    <>
-      <Button>
-        <MainView>
-          <Image
-            src={
-              props.image
-                ? props.image
-                : "https://triunfo.pe.gov.br/pm_tr430/wp-content/uploads/2018/03/sem-foto.jpg"
-            }
-            alt={"Não foi possível carregar a imagem!"}
-          />
-          <Text>{props.name}</Text>
-        </MainView>
-      </Button>
-    </>
+    <Button to={`DetailsCharacter/${props.id}`}>
+      <MainDiv>
+        <Image
+          src={
+            props.image
+              ? props.image
+              : "https://triunfo.pe.gov.br/pm_tr430/wp-content/uploads/2018/03/sem-foto.jpg"
+          }
+          alt={"Não foi possível carregar a imagem!"}
+        />
+        <Text>{props.name}</Text>
+      </MainDiv>
+    </Button>
   );
 };
 

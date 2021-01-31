@@ -28,7 +28,11 @@ export const getCharacter = async (idUrl: string) => {
 const getCharacters = async (idUrl?: string) => {
   const characters: Character[] = [];
   await apiMarvel
-    .get(idUrl ? idUrl : "https://gateway.marvel.com/v1/public/characters")
+    .get(
+      idUrl
+        ? "http://gateway.marvel.com/v1/public/characters/" + idUrl
+        : "https://gateway.marvel.com/v1/public/characters"
+    )
     .then((result: any) => {
       if (result) {
         result = result.data.data.results;

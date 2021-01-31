@@ -11,12 +11,12 @@ import { Provider } from "react-redux";
 import { createStore, applyMiddleware } from "redux";
 import { useSelector } from "react-redux";
 import { ApplicationState } from "./App/redux";
-import { getWindowDimensions } from "./App/shared/components/Dimensions";
+
 //Setting Redux
 const createStoreWithMiddleware = applyMiddleware(thunk)(createStore);
 const store = createStoreWithMiddleware(reducer);
 
-const MainView = styled.div`
+const MainDiv = styled.div`
   flex: 1;
   width: 100%;
   height: 100%;
@@ -29,10 +29,10 @@ const App = () => {
   );
 
   return (
-    <MainView>
+    <MainDiv>
       <Routes />
       {isLoading && <Loading />}
-    </MainView>
+    </MainDiv>
   );
 };
 
